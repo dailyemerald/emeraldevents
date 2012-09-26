@@ -1,5 +1,8 @@
-= link_to "Emeraldevents", root_path, :class => 'brand'
+= link_to "Emerald Events", root_path, :class => 'brand'
 %ul.nav
+  %li
+    %a{:href=>"/events"} Show Events
+
   - if user_signed_in?
     %li
       = link_to 'Logout', destroy_user_session_path, :method=>'delete'

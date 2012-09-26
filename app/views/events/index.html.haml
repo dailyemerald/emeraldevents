@@ -1,0 +1,35 @@
+%h1 Listing events
+
+%table
+  %tr
+    %th Title
+    %th Description
+    %th Category
+    %th Start time
+    %th End time
+    %th Price
+    %th Contact name
+    %th Contact phone
+    %th Status
+    %th
+    %th
+    %th
+
+  - @events.each do |event|
+    %tr
+      %td= event.title
+      %td= event.description
+      %td= event.category
+      %td= event.start_time
+      %td= event.end_time
+      %td= event.price
+      %td= event.contact_name
+      %td= event.contact_phone
+      %td= event.status
+      %td= link_to 'Show', event
+      %td= link_to 'Edit', edit_event_path(event)
+      %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Event', new_event_path
