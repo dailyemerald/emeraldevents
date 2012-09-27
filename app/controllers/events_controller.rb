@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   
-  before_filter :authenticate_user!
   
   # GET /events
   # GET /events.json
@@ -9,7 +8,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @events }
+      format.json { render json: @events, :callback => params[:callback] }
     end
   end
 
@@ -27,7 +26,8 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    authorize! :new, @user, :message => "Not authorized to get new."
+    authorize! :new, @user, :message => "Not authorized to GET new."
+
     @event = Event.new
 
     respond_to do |format|
@@ -38,7 +38,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
-    authorize! :new, @user, :message => "Not authorized to edit."
     @event = Event.find(params[:id])
   end
 

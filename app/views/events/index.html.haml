@@ -10,7 +10,6 @@
     %th Price
     %th Contact name
     %th Contact phone
-    %th Status
     %th
     %th
     %th
@@ -25,7 +24,6 @@
       %td= event.price
       %td= event.contact_name
       %td= event.contact_phone
-      %td= event.status
       %td= link_to 'Show', event
       %td= link_to 'Edit', edit_event_path(event)
       %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
