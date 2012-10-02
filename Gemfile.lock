@@ -181,6 +181,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    unicorn-rails (0.0.1)
+      rack
+      unicorn
     warden (1.2.1)
       rack (>= 1.0)
     xpath (0.1.4)
@@ -213,3 +216,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
   unicorn (>= 4.3.1)
+  unicorn-rails
