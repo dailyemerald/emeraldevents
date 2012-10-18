@@ -26,7 +26,7 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.json
   def new
-    authorize! :new, @user, :message => "Not authorized to GET new."
+    #authorize! :new, @user, :message => "Not authorized to GET new."
 
     @event = Event.new
 
@@ -44,17 +44,22 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    authorize! :new, @user, :message => "Not authorized to POST new."
-    @event = Event.new(params[:event])
+    #authorize! :new, @user, :message => "Not authorized to POST new."
+    
+    if current_user.try(:admin?)
+      @event = Event.new(params[:event])
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @event.save
+          format.html { redirect_to @event, notice: 'Event was successfully created.' }
+          format.json { render json: @event, status: :created, location: @event }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      # not an admin 
     end
   end
 
