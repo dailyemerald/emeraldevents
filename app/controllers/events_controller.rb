@@ -44,9 +44,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    #authorize! :new, @user, :message => "Not authorized to POST new."
-    
-    if current_user.try(:admin?)
       @event = Event.new(params[:event])
 
       respond_to do |format|
@@ -58,9 +55,6 @@ class EventsController < ApplicationController
           format.json { render json: @event.errors, status: :unprocessable_entity }
         end
       end
-    else
-      # not an admin 
-    end
   end
 
   # PUT /events/1
@@ -90,4 +84,13 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def print
+    @events = Event.find(:all, :conditions => ["start_time >= ?", Time.zone.now], :order => "start_time asc", :limit => 100) #not DRY, make a scope for this!
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
+  end
+  
 end

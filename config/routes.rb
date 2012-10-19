@@ -1,4 +1,7 @@
 Emeraldevents::Application.routes.draw do
+  
+  match '/print' => "events#print"
+  
   resources :events
 
   authenticated :user do
